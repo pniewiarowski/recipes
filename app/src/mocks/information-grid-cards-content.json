@@ -1,0 +1,26 @@
+[
+  {
+    "title": "account?!",
+    "content": "you are not logged yet! what are you waiting for bro? bruh wtf get some help...cmon login or register, because i lose my patience, i am seriuos bro, i am not joking do it or i will kill you...",
+    "button": "login or register",
+    "link": "/authentication/login"
+  },
+  {
+    "title": "daily recipe",
+    "content": "look for a recipe in our database, we have a great recipe from around the world, you are looking for some exotic recipe? we got this, u are looking how to make vodka? we also got it! do not wait just look!",
+    "button": "search a recipe",
+    "link": "/recipes"
+  },
+  {
+    "title": "donate?!",
+    "content": "please bro give some donate to make this app better, devs wants to increase their payments, and i am not earning enough to pay them, soo basicly you starve their family if u do not donate",
+    "button": "make donate",
+    "link": ""
+  },
+  {
+    "title": "jesus it's a bug!",
+    "content": "you notice some bugs in our application cmon report this immediately probably we are testing on production because u do not give enough money that we can test our application on development environment",
+    "button": "report bug",
+    "link": ""
+  }
+]
