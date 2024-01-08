@@ -7,3 +7,5 @@ export { default as FooterColumn } from "./footer-column";
 export { default as FooterColumnHeader } from "./footer-column-header";
 export { default as FooterColumnItemContainer } from "./footer-column-item-container";
 export { default as FooterColumnItem } from "./footer-column-item";
+export { default as LoadingCircle } from "./loading-circle";
+export { default as Scale } from "./scale";

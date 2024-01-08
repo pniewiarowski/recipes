@@ -1,19 +1,33 @@
+import { useEffect } from "react";
 import { Grid, Paper } from "@mui/material";
 import { PageHeader, RegisterForm } from "../organisms";
+import { useCookies } from "../hooks";
+import { useNavigate } from "react-router-dom";
 
-const RegisterPage = () => {
+const RegisterPage = (): JSX.Element => {
+  const { get } = useCookies();
+  const navigate = useNavigate();
+
+  if (get("userID")) {
+    navigate("/");
+  }
+
+  useEffect(() => {
+    document.title = "Register | Recipe Hub";
+  }, []);
+
   return (
     <Grid container spacing={"0.25rem"} style={{ padding: "0.25rem" }}>
       <Grid item xs={12} xl={6}>
-        <PageHeader content="Register" />
+        <PageHeader content="register" />
       </Grid>
       <Grid item xs={12} xl={6}>
-        <PageHeader content="join to our community!" />
+        <PageHeader content="join to our community" />
       </Grid>
-      <Grid item xs={12} xl={6} style={{ height: "400px", overflow: "hidden" }}>
+      <Grid item xs={12} xl={6} style={{ height: "45rem", overflow: "hidden" }}>
         <Paper
           style={{
-            padding: "1rem",
+            padding: "10rem",
             height: "100%",
             display: "flex",
             justifyContent: "center",
@@ -22,7 +36,7 @@ const RegisterPage = () => {
           <RegisterForm />
         </Paper>
       </Grid>
-      <Grid item xs={12} xl={6} style={{ height: "400px", overflow: "hidden" }}>
+      <Grid item xs={12} xl={6} style={{ height: "45rem", overflow: "hidden" }}>
         <Paper
           style={{
             display: "flex",

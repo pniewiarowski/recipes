@@ -1,15 +1,27 @@
-import { RecipeRepository, UserRepository } from "../api";
+import {
+  AuthorizationRepository,
+  RecipeRepository,
+  UserRepository,
+} from "../api";
 
 interface Repositories {
-    recipesRepository: RecipeRepository,
-    usersRepository: UserRepository,
+  authorizationRepository: AuthorizationRepository;
+  recipesRepository: RecipeRepository;
+  usersRepository: UserRepository;
 }
 
+let repositories: Repositories | null = null;
+
 const useBackend = (): Repositories => {
-    return {
-        recipesRepository: new RecipeRepository(),
-        usersRepository: new UserRepository(),
-    }    
-}
+  if (!repositories) {
+    repositories = {
+      authorizationRepository: new AuthorizationRepository(),
+      recipesRepository: new RecipeRepository(),
+      usersRepository: new UserRepository(),
+    };
+  }
+
+  return repositories;
+};
 
 export default useBackend;

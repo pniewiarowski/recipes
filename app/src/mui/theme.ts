@@ -17,6 +17,7 @@ const theme: ThemeOptions = createTheme({
       paper: "#292929",
     },
   },
+  spacing: 4,
   typography: {
     h2: {
       fontWeight: 1000,

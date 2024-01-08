@@ -1,20 +1,33 @@
+import { useEffect } from "react";
 import { Grid, Paper } from "@mui/material";
 import { LoginForm, PageHeader } from "../organisms";
-import Logo from "../../public/logo.png";
+import { useCookies } from "../hooks";
+import { useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
+const LoginPage = (): JSX.Element => {
+  const { get } = useCookies();
+  const navigate = useNavigate();
+
+  if (get("userID")) {
+    navigate("/");
+  }
+
+  useEffect(() => {
+    document.title = "Login | Recipe Hub";
+  }, []);
+
   return (
     <Grid container spacing={"0.25rem"} style={{ padding: "0.25rem" }}>
       <Grid item xs={12} xl={6}>
-        <PageHeader content="Login" />
+        <PageHeader content="login" />
       </Grid>
       <Grid item xs={12} xl={6}>
         <PageHeader content="thanks for being member of our community" />
       </Grid>
-      <Grid item xs={12} xl={6} style={{ height: "270px", overflow: "hidden" }}>
+      <Grid item xs={12} xl={6} style={{ height: "45rem", overflow: "hidden" }}>
         <Paper
           style={{
-            padding: "1rem",
+            padding: "10rem",
             height: "100%",
             display: "flex",
             justifyContent: "center",
@@ -28,7 +41,7 @@ const LoginPage = () => {
         xs={12}
         xl={6}
         style={{
-          height: "270px",
+          height: "45rem",
           overflow: "hidden",
         }}
       >
@@ -48,3 +61,5 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
+

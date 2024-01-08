@@ -1,4 +1,4 @@
-import { Grid, Paper, useTheme } from "@mui/material";
+import { Box, Grid, Paper, Typography, useTheme } from "@mui/material";
 import {
   FooterColumn,
   FooterColumnHeader,
@@ -53,7 +53,15 @@ const Footer = () => {
               <FooterColumnItem>search</FooterColumnItem>
               <FooterColumnItem>all</FooterColumnItem>
               <FooterColumnItem>report</FooterColumnItem>
-              <FooterColumnItem>add new</FooterColumnItem>
+              <Link
+                style={{
+                  textDecoration: "none",
+                  color: theme.palette.secondary.main,
+                }}
+                to={"/recipes/add"}
+              >
+                <FooterColumnItem>add new</FooterColumnItem>
+              </Link>
             </FooterColumnItemContainer>
           </FooterColumn>
         </Grid>
@@ -118,6 +126,16 @@ const Footer = () => {
               </FooterColumnItem>
             </FooterColumnItemContainer>
           </FooterColumn>
+        </Grid>
+        <Grid item xl={12}>
+          <Box style={{ textAlign: "right", margin: "2rem 1.5rem 0 1.5rem" }}>
+            <Typography variant={"body1"}>
+              Copyright© 2024...anyway, we don't care.
+            </Typography>
+            <Typography variant={"body1"}>
+              Realizated by Paweł Niewiarowski, Paweł Rudź and Konrad Jankowski.
+            </Typography>
+          </Box>
         </Grid>
       </Grid>
     </FooterContainer>

@@ -1,36 +1,53 @@
 import { useEffect, useState } from "react";
-import { Grid, Paper } from "@mui/material";
+import { Grid, Paper, useTheme } from "@mui/material";
 import { InformationCard, PageHeader, RecipeList } from "../organisms";
 import cards from "../mocks/information-grid-cards-content.json";
-import Logo from "../images/logo.png";
 import { useBackend } from "../hooks";
 import { RecipeDefinition } from "../api";
+import { LoadingCircle } from "../molecules";
 
 const HomePage = (): JSX.Element => {
+  const theme = useTheme();
   const [topRecipes, setTopRecipes] = useState<Array<RecipeDefinition>>();
   const [lastRecipes, setLastRecipes] = useState<Array<RecipeDefinition>>();
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
+  const [isRecipesLoading, setIsRecipeLoading] = useState<boolean>(true);
   const { recipesRepository } = useBackend();
 
   useEffect(() => {
-    const loadRecipes = async () => {
+    const load = async () => {
+      const recipes: Array<RecipeDefinition> = await recipesRepository.get();
+
+      setTopRecipes(
+        recipes
+          .slice(0, 5)
+          .sort((recipe: RecipeDefinition, next: RecipeDefinition) => {
+            return next.rating - recipe.rating;
+          })
+      );
+
+      setLastRecipes(recipes.reverse().slice(0, 5));
+      setIsRecipeLoading(false);
     };
 
-    loadRecipes();
-  }, [topRecipes, lastRecipes]);
+    document.title = "Home Page | Recipe Hub";
+    load();
+  }, []);
 
   return (
-    <Grid container spacing={"0.25rem"} style={{ padding: "0.25rem" }}>
+    <Grid
+      container
+      spacing={theme.spacing(0.75)}
+      style={{ padding: theme.spacing(1) }}
+    >
       <Grid item xs={12} xl={6}>
-        <PageHeader content="RecipeHub" />
+        <PageHeader content="welcome in recipe hub" />
       </Grid>
       <Grid item xs={12} xl={6}>
-        <PageHeader content="best place to look for recipe!" />
+        <PageHeader content="best place to look for recipe" />
       </Grid>
       {cards.map((card) => {
         return (
-          <Grid item xs={12} md={6} xl={3}>
+          <Grid item xs={12} md={6} xl={3} key={card.id}>
             <InformationCard
               title={card.title}
               content={card.content}
@@ -40,21 +57,34 @@ const HomePage = (): JSX.Element => {
           </Grid>
         );
       })}
-      <Grid item xs={12} xl={6}>
-        <RecipeList heading={"top 10 recipes"} />
-      </Grid>
-      <Grid item xs={12} xl={6}>
-        <RecipeList heading={"10 last recipes"} />
-      </Grid>
-      <Grid item xl={12}>
-        <Paper
-          style={{
-            width: "100%",
-            height: "95px",
-            backgroundImage: `url('${Logo}')`,
-          }}
-        />
-      </Grid>
+
+      {!isRecipesLoading && topRecipes && !!topRecipes.length && (
+        <Grid item xs={12} xl={6}>
+          <RecipeList recipes={topRecipes} heading={"top 5 recipes"} />
+        </Grid>
+      )}
+
+      {isRecipesLoading && (
+        <Grid item xs={12} xl={6}>
+          <Paper style={{ height: "300px" }}>
+            <LoadingCircle />
+          </Paper>
+        </Grid>
+      )}
+
+      {!isRecipesLoading && lastRecipes && !!lastRecipes.length && (
+        <Grid item xs={12} xl={6}>
+          <RecipeList recipes={lastRecipes} heading={"last 5 recipes"} />
+        </Grid>
+      )}
+
+      {isRecipesLoading && (
+        <Grid item xs={12} xl={6}>
+          <Paper style={{ height: "300px" }}>
+            <LoadingCircle />
+          </Paper>
+        </Grid>
+      )}
     </Grid>
   );
 };

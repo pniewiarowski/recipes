@@ -1,5 +1,6 @@
 import { Box, Button, Divider, Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useTheme } from "@emotion/react";
 
 interface Props {
   title: string;
@@ -9,11 +10,13 @@ interface Props {
 }
 
 const InformationCard = (props: Props): JSX.Element => {
+  const theme = useTheme();
+
   return (
     <Paper>
       <Box
         style={{
-          padding: "1rem",
+          padding: theme.spacing(10),
           display: "flex",
           flexDirection: "column",
         }}
@@ -28,7 +31,7 @@ const InformationCard = (props: Props): JSX.Element => {
         >
           {props.content}
         </Typography>
-        <Divider style={{ padding: "1rem" }} />
+        <Divider style={{ marginTop: theme.spacing(2), marginBottom: theme.spacing(2), padding: "1rem" }} />
         <Box style={{ width: "100%" }}>
           <Link to={props.link}>
             <Button variant={"text"} style={{ width: "100%" }}>{props.button}</Button>
