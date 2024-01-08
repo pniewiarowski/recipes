@@ -1,0 +1,42 @@
+version: "3.5"
+
+networks:
+  project:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24
+
+volumes:
+  pg-data:
+  pg-admin-data:
+
+services:
+  recipe-hub-database:
+    image: postgres:16.1
+    container_name: recipe-hub-database-service
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=recipe-hub-database
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password123
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    networks:
+      project:
+        ipv4_address: 10.0.0.10
+
+  recipe-hub-database-admin-panel:
+    image: dpage/pgadmin4
+    container_name: recipe-hub-database-admin-panel-service
+    restart: unless-stopped
+    ports:
+      - "1010:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.admin
+      PGADMIN_DEFAULT_PASSWORD: password123
+    volumes:
+      - pg-admin-data:/var/lib/pgadmin
+    networks:
+      project:
+        ipv4_address: 10.0.0.20
