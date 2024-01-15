@@ -37,7 +37,7 @@ const RecipeList = (props: Props): JSX.Element => {
             <ListItemText
               style={{ color: theme.palette.text.primary }}
               primary={recipe.title}
-              secondary={`Rating ${recipe.rating}/5`}
+              secondary={`Rating ${recipe.rating}/100`}
             />
             {props.showUI && <Button>edit</Button>}
             {props.showUI && props.onDelete && <Button color="error" onClick={() => props.onDelete(recipe.entityID)}>delete</Button>}

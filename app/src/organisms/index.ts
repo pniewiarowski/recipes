@@ -8,3 +8,4 @@ export { default as InformationCard } from "./information-card";
 export { default as Footer } from "./footer";
 export { default as SearchList } from "./search-list";
 export { default as RecipeView } from "./recipe-view";
+export { default as AccountDetails } from "./account-details";

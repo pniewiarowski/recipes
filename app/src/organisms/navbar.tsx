@@ -135,7 +135,9 @@ const Navbar = (): JSX.Element => {
 
               {user && (
                 <Box>
-                  <Button variant={"contained"}>account</Button>
+                  <Link to={`/account`}>
+                    <Button variant={"contained"}>account</Button>
+                  </Link>
                 </Box>
               )}
 

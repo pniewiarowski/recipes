@@ -9,6 +9,8 @@ import {
   RecipeDetailsPage,
   UserRecipesPage,
   RegisterPage,
+  RecipeEditPage,
+  AccountPage
 } from "./pages";
 import { Footer, Navbar } from "./organisms";
 import { UserDefinition } from "./api";
@@ -57,6 +59,8 @@ const App = (): JSX.Element => {
                 <Route path="/recipes/:id" element={<RecipeDetailsPage />} />
                 <Route path="/users/:id/recipes" element={<UserRecipesPage />} />
                 <Route path="/recipes/add" element={<RecipeAddPage />} />
+                <Route path="/account" element={<AccountPage />} />
+                <Route path="/recipes/edit/:id" element={<RecipeEditPage />} />
               </Routes>
               <Footer />
             </BrowserRouter>
